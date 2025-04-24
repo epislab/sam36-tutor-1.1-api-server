@@ -1,0 +1,36 @@
+python -m uvicorn main:app --reload
+docker ps
+docker ps -a
+docker images
+docker start backend
+docker start database
+docker-compose
+docker exec -it database  psql -U myuser -d mydb
+
+docker compose logs --tail=500 -f backend
+docker compose logs --tail=500 -f crawler-api
+
+docker exec -it backend bash
+docker exec -it backend /bin/bash
+
+docker exec -it backend env | Select-String "DB_"
+docker-compose down --volumes
+docker-compose up --build -d
+docker-compose build --no-cache backend
+docker-compose up -d backend
+
+docker-compose down 
+docker-compose up --build -d 
+docker-compose up -d
+pip install python-jose[cryptography]
+
+
+
+
+docker compose down
+docker compose build --no-cache
+docker compose up
+
+kpmg-crawler-fast-250407-production.up.railway.app
+
+docker exec -it crawler-crawler-api-1 bash -c "PGPASSWORD=YLkbHpjtkasEeLizyLxNUvtdPSlkpNaa psql -h crossover.proxy.rlwy.net -U postgres -p 27041 -d railway"

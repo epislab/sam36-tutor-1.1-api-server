@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fastapi-app
+    env: docker
+    repo: https://github.com/epislab/kpmg-epis-fast-2502.git
+    region: singapore
+    plan: free
+    branch: main
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /

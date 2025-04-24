@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  gateway:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/app/app
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    depends_on:
+      - auth
+    restart: unless-stopped
+
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile.auth
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env
+    restart: unless-stopped 

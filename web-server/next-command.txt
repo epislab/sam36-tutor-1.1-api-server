@@ -1,0 +1,4 @@
+현재 실행 중인 포트 확인  
+netstat -ano | findstr ":3000"
+
+pnpm dev 

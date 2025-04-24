@@ -1,0 +1,1 @@
+# docker exec -it database  psql -U myuser -d mydb

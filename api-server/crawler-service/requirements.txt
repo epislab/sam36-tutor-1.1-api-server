@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+requests
+beautifulsoup4
+sqlalchemy==1.4.23
+asyncpg
+pytz
+python-dotenv
+psycopg2-binary

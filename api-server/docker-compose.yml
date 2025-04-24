@@ -1,0 +1,84 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: hc_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: hc_user
+      POSTGRES_PASSWORD: hc_password
+      POSTGRES_DB: hc_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  gateway:
+    build:
+      context: ./gateway_service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./gateway_service/.env
+    depends_on:
+      - postgres
+
+  actlog:
+    build:
+      context: ./actlog_service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    env_file:
+      - ./actlog_service/.env
+    depends_on:
+      - postgres
+  company:
+    build:
+      context: ./company_service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    env_file:
+      - ./company_service/.env
+    depends_on:
+      - postgres
+
+  dsdgen:
+    build:
+      context: ./dsdgen_service
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    env_file:
+      - ./dsdgen_service/.env
+    depends_on:
+      - postgres
+    volumes:
+      - ./dart_documents:/app/app/dart_documents
+
+
+  user:
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    env_file:
+      - ./user_service/.env
+    depends_on:
+      - postgres
+
+  xbrlgen:
+    build:
+      context: ./xbrlgen_service
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    env_file:
+      - ./xbrlgen_service/.env
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
